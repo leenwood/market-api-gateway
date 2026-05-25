@@ -2,3 +2,6 @@
 .qwen
 .claude
 .env
+bin/
+coverage.out
+coverage.html
