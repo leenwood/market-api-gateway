@@ -34,6 +34,11 @@ tasks:
       - go test -race -count=1 -coverprofile=coverage.out ./...
       - go tool cover -html=coverage.out -o coverage.html
 
+  docs:
+    desc: Regenerate Swagger docs from annotations (output → docs/)
+    cmds:
+      - go tool swag init --generalInfo cmd/gateway/main.go --dir . --output docs --outputTypes go,json,yaml
+
   lint:
     desc: Run golangci-lint
     cmds:

@@ -9,6 +9,7 @@ import (
 	"time"
 
 	"go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp"
+	httpSwagger "github.com/swaggo/http-swagger/v2"
 
 	"market-api-gateway/internal"
 	"market-api-gateway/internal/app/adapter"
@@ -74,6 +75,7 @@ func buildServer(cfg *internal.Config, infra *Infra, log *slog.Logger) *http.Ser
 	mux.HandleFunc("GET /health", handler.HealthHandler)
 	mux.Handle("GET /metrics", infra.Metrics.Handler())
 	mux.Handle("GET /ready", handler.ReadyHandler(buildPingers(cfg)))
+	mux.Handle("/swagger/", httpSwagger.WrapHandler)
 
 	// All other requests — proxy handler.
 	mux.Handle("/", buildProxyHandler(infra, log))
