@@ -38,6 +38,7 @@ var Routes = []Route{
 	{Method: "POST", Pattern: "/api/v1/auth/register", Type: Public, Service: ServiceAuth},
 	{Method: "POST", Pattern: "/api/v1/auth/login", Type: Public, Service: ServiceAuth},
 	{Method: "POST", Pattern: "/api/v1/auth/refresh", Type: Public, Service: ServiceAuth},
+	{Method: "POST", Pattern: "/api/v1/auth/guest", Type: Public, Service: ServiceAuth},
 
 	// --- Public: market-core ---
 	{Method: "GET", Pattern: "/api/v1/products", Type: Public, Service: ServiceCatalog},
@@ -69,6 +70,7 @@ var Routes = []Route{
 	{Method: "POST", Pattern: "/api/v1/cart/:userID/items", Type: Protected, Service: ServiceCart},
 	{Method: "DELETE", Pattern: "/api/v1/cart/:userID/items/:productID", Type: Protected, Service: ServiceCart},
 	{Method: "PATCH", Pattern: "/api/v1/cart/:userID/items/:productID", Type: Protected, Service: ServiceCart},
+	{Method: "POST", Pattern: "/api/v1/cart/:userID/merge", Type: Protected, Service: ServiceCart},
 
 	// --- Protected: order-service ---
 	{Method: "GET", Pattern: "/api/v1/orders", Type: Protected, Service: ServiceOrder},
