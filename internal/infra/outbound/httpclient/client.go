@@ -164,6 +164,7 @@ func (c *Client) RoundTrip(req *http.Request) (*http.Response, error) {
 
 	otel.GetTextMapPropagator().Inject(req.Context(), propagationCarrier(req.Header))
 
+	req.RequestURI = ""
 	resp, err := c.inner.Do(req)
 	statusLabel := "error"
 	if err == nil {

@@ -3,6 +3,7 @@ package tracing
 import (
 	"context"
 	"fmt"
+	"strings"
 
 	"go.opentelemetry.io/otel"
 	"go.opentelemetry.io/otel/exporters/otlp/otlptrace/otlptracehttp"
@@ -62,7 +63,8 @@ func newExporter(ctx context.Context, cfg Config) (sdktrace.SpanExporter, error)
 	if cfg.Exporter == "otlp" {
 		opts := []otlptracehttp.Option{otlptracehttp.WithInsecure()}
 		if cfg.Endpoint != "" {
-			opts = append(opts, otlptracehttp.WithEndpoint(cfg.Endpoint))
+			endpoint := strings.TrimPrefix(strings.TrimPrefix(cfg.Endpoint, "https://"), "http://")
+			opts = append(opts, otlptracehttp.WithEndpoint(endpoint))
 		}
 		return otlptracehttp.New(ctx, opts...)
 	}
